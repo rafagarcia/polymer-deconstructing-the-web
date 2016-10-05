@@ -1,199 +1,266 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>POLYMER, deconstructing the web</title>
+    <title>POLYMER, deconstructing the web</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div style="text-align: center; margin-top: 20px; color: #666;"><img style="height: 27px; width: 40px;" src="https://www.polymer-project.org/images/logos/p-logo.png" alt="Polymer Logo"> <span>POLYMER, deconstructing the web</span></div>
-			<div class="slides">
-				<section>
-					<h2>PRESENTATION</h2>
-					<ul>
-						<li>My name is Rafael García</li>
-						<li>Work as Front-end developer in <a href="http://sngular.team/" target="_blank">S|ngular</a></li>
-						<li>Last 15 months working with Polymer for BBVA</li>
-						<li>My Twitter account is @rafagarcia</li>
-					</ul>
-				</section>
-				<section>
-					<section>
-						<h2>WHAT IS POLYMER AND WHAT IS NOT (OR WASN´T)</h2>
-						<ul>
-							<li>Polymer IS A LIBRARY, built on top of Web Components, designed to help us creating Web Components, NOT A FRAMEWORK</li>
-							<li class="fragment">or IT WASN´T, because with the new Polymer App Toolbox Polymer allows us to build Progressive Web Apps following the PRPL pattern</li>
-						</ul>
-					</section>
-					<section>
-						<h2>THE PRPL Pattern</h2>
-						<ul>
-							<li>Push critical resources for the initial route</li>
-							<li>Render initial route</li>
-							<li>Pre-cache remaining routes</li>
-							<li>Lazy-load and create remaining routes on demand</li>
-						</ul>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2><a href="http://webcomponents.org//" target="_blank">WEB COMPONENTS</a> AS A STANDARD</h2>
-						<ul>
-							<li>Reusable user interface widgets that are created using open Web technology</li>
-							<li>They are part of the browser (#usetheplatform)</li>
-							<li>An existing Web Component can be used without writing code, simply by adding an import statement to an HTML page</li>
-							<li>Composed by four specifications: Custom Elements, HTML Imports, Templates, Shadow DOM</li>
-						</ul>
-					</section>
-					<section>
-						<h2><a href="http://w3c.github.io/webcomponents/spec/custom/" target="_blank">Custom Elements</a></h2>
-						<p>This specification describes the method for enabling the author to define and use new types of DOM elements in a document</p>
-					</section>
-					<section>
-						<h2><a href="http://w3c.github.io/webcomponents/spec/imports/" target="_blank">HTML Imports</a></h2>
-						<p>HTML Imports are a way to include and reuse HTML documents in other HTML documents</p>
-					</section>
-					<section>
-						<h2><a href="https://html.spec.whatwg.org/multipage/scripting.html#the-template-element" target="_blank">Templates</a></h2>
-						<p>This specification describes a method for declaring inert DOM subtrees in HTML and manipulating them to instantiate document fragments with identical contents</p>
-					</section>
-					<section>
-						<h2><a href="http://w3c.github.io/webcomponents/spec/shadow/" target="_blank">Shadow DOM</a></h2>
-						<p>This specification describes a method of establishing and maintaining functional boundaries between DOM trees and how these trees interact with each other within a document, thus enabling better functional encapsulation within the DOM</p>
-					</section>
-					<section>
-						<h2>Browser support</h2>
-						<table>
-							<thead>
-								<tr>
-									<th>Spec</th>
-									<th></th>
-									<th>Chrome</th>
-									<th>Opera</th>
-									<th>Firefox</th>
-									<th>Safari</th>
-									<th>IE/Edge</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Templates</td>
-									<td></td>
-									<td>Full</td>
-									<td>Full</td>
-									<td>Full</td>
-									<td>Full</td>
-									<td>Full</td>
-								</tr>
-								<tr>
-									<td>HTML Imports</td>
-									<td></td>
-									<td>Full</td>
-									<td>Full</td>
-									<td>Partial</td>
-									<td>None</td>
-									<td>None</td>
-								</tr>
-								<tr>
-									<td>Custom elements</td>
-									<td></td>
-									<td>Full</td>
-									<td>Full</td>
-									<td>Partial</td>
-									<td>None</td>
-									<td>None</td>
-								</tr>
-								<tr>
-									<td>Shadow DOM</td>
-									<td></td>
-									<td>Full</td>
-									<td>Full</td>
-									<td>Partial</td>
-									<td>Partial</td>
-									<td>None</td>
-								</tr>
-							</tbody>
-						</table>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2><a href="http://bradfrost.com/blog/post/atomic-web-design/" target="_blank">ATOMIC DESIGN</a> AS A COMPONENT DESIGN APPROACH</h2>
-						<blockquote cite="http://bradfrost.com/blog/post/atomic-web-design/">
-							&ldquo;We are not longer designing pages; we are designing systems of components&rdquo;
-							@stephenhay
-						</blockquote>
-					</section>
-					<section>
-						<h2>ATOMIC DESIGN. Definition</h2>
-						<p>Atomic design is a methodology created by Brad Frost to help us building design systems, structured in five levels:</p>
-						<ol>
-							<li>Atoms</li>
-							<li>Molecules</li>
-							<li>Organisms</li>
-							<li>Templates</li>
-							<li>Pages</li>
-						</ol>
-					</section>
-					<section>
-						<h2>Atoms</h2>
-						<p>Atoms are the basic building blocks of matter. Applied to web interfaces, atoms are our HTML tags, such as a form label, an input or a button.</p>
-					</section>
-					<section>
-						<h2>Molecules</h2>
-						<p>Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. For example, a form label, input or button combined together as a form</p>
-					</section>
-					<section>
-						<h2>Organisms</h2>
-						<p>Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface</p>
-					</section>
-					<section>
-						<h2>Templates</h2>
-						<p>Templates consist mostly of groups of organisms stitched together to form pages</p>
-					</section>
-					<section>
-						<h2>Pages</h2>
-						<p>Pages are specific instances of templates</p>
-					</section>
-				</section>
-				<section>Slide 5</section>
-				<section>Slide 6</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div style="text-align: center; margin-top: 20px; color: #666;"><img style="height: 27px; width: 40px;" src="https://www.polymer-project.org/images/logos/p-logo.png" alt="Polymer Logo"> <span>POLYMER, deconstructing the web</span></div>
+      <div class="slides">
+        <section>
+          <h2>PRESENTATION</h2>
+          <ul>
+            <li>My name is Rafael García</li>
+            <li>Work as Front-end developer in <a href="http://sngular.team/" target="_blank">S|ngular</a></li>
+            <li>Last 15 months working with Polymer for BBVA</li>
+            <li>My Twitter account is @rafagarcia</li>
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h2>WHAT IS POLYMER AND WHAT IS NOT (OR WASN´T)</h2>
+            <ul>
+              <li>Polymer IS A LIBRARY, built on top of Web Components, designed to help us creating Web Components, NOT A FRAMEWORK</li>
+              <li class="fragment">or IT WASN´T, because with the new Polymer App Toolbox Polymer allows us to build Progressive Web Apps following the PRPL pattern</li>
+            </ul>
+          </section>
+          <section>
+            <h2>THE PRPL Pattern</h2>
+            <ul>
+              <li>Push critical resources for the initial route</li>
+              <li>Render initial route</li>
+              <li>Pre-cache remaining routes</li>
+              <li>Lazy-load and create remaining routes on demand</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2><a href="http://webcomponents.org//" target="_blank">WEB COMPONENTS</a> AS A STANDARD</h2>
+            <ul>
+              <li>Reusable user interface widgets that are created using open Web technology</li>
+              <li>They are part of the browser (#usetheplatform)</li>
+              <li>An existing Web Component can be used without writing code, simply by adding an import statement to an HTML page</li>
+              <li>Composed by four specifications: Custom Elements, HTML Imports, Templates, Shadow DOM</li>
+            </ul>
+          </section>
+          <section>
+            <h2><a href="http://w3c.github.io/webcomponents/spec/custom/" target="_blank">Custom Elements</a></h2>
+            <p>This specification describes the method for enabling the author to define and use new types of DOM elements in a document</p>
+          </section>
+          <section>
+            <h2><a href="http://w3c.github.io/webcomponents/spec/imports/" target="_blank">HTML Imports</a></h2>
+            <p>HTML Imports are a way to include and reuse HTML documents in other HTML documents</p>
+          </section>
+          <section>
+            <h2><a href="https://html.spec.whatwg.org/multipage/scripting.html#the-template-element" target="_blank">Templates</a></h2>
+            <p>This specification describes a method for declaring inert DOM subtrees in HTML and manipulating them to instantiate document fragments with identical contents</p>
+          </section>
+          <section>
+            <h2><a href="http://w3c.github.io/webcomponents/spec/shadow/" target="_blank">Shadow DOM</a></h2>
+            <p>This specification describes a method of establishing and maintaining functional boundaries between DOM trees and how these trees interact with each other within a document, thus enabling better functional encapsulation within the DOM</p>
+          </section>
+          <section>
+            <h2>Browser support</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Spec</th>
+                  <th></th>
+                  <th>Chrome</th>
+                  <th>Opera</th>
+                  <th>Firefox</th>
+                  <th>Safari</th>
+                  <th>IE/Edge</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Templates</td>
+                  <td></td>
+                  <td>Full</td>
+                  <td>Full</td>
+                  <td>Full</td>
+                  <td>Full</td>
+                  <td>Full</td>
+                </tr>
+                <tr>
+                  <td>HTML Imports</td>
+                  <td></td>
+                  <td>Full</td>
+                  <td>Full</td>
+                  <td>Partial</td>
+                  <td>None</td>
+                  <td>None</td>
+                </tr>
+                <tr>
+                  <td>Custom elements</td>
+                  <td></td>
+                  <td>Full</td>
+                  <td>Full</td>
+                  <td>Partial</td>
+                  <td>None</td>
+                  <td>None</td>
+                </tr>
+                <tr>
+                  <td>Shadow DOM</td>
+                  <td></td>
+                  <td>Full</td>
+                  <td>Full</td>
+                  <td>Partial</td>
+                  <td>Partial</td>
+                  <td>None</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2><a href="http://bradfrost.com/blog/post/atomic-web-design/" target="_blank">ATOMIC DESIGN</a> AS A COMPONENT DESIGN APPROACH</h2>
+            <blockquote cite="http://bradfrost.com/blog/post/atomic-web-design/">
+              &ldquo;We are not longer designing pages; we are designing systems of components&rdquo;
+              @stephenhay
+            </blockquote>
+          </section>
+          <section>
+            <h2>ATOMIC DESIGN. Definition</h2>
+            <p>Atomic design is a methodology created by Brad Frost to help us building design systems, structured in five levels:</p>
+            <ol>
+              <li>Atoms</li>
+              <li>Molecules</li>
+              <li>Organisms</li>
+              <li>Templates</li>
+              <li>Pages</li>
+            </ol>
+          </section>
+          <section>
+            <h2>Atoms</h2>
+            <p>Atoms are the basic building blocks of matter. Applied to web interfaces, atoms are our HTML tags, such as a form label, an input or a button.</p>
+          </section>
+          <section>
+            <h2>Molecules</h2>
+            <p>Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. For example, a form label, input or button combined together as a form</p>
+          </section>
+          <section>
+            <h2>Organisms</h2>
+            <p>Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface</p>
+          </section>
+          <section>
+            <h2>Templates</h2>
+            <p>Templates consist mostly of groups of organisms stitched together to form pages</p>
+          </section>
+          <section>
+            <h2>Pages</h2>
+            <p>Pages are specific instances of templates</p>
+          </section>
+        </section>
+        <section>
+          <h2>Two ways to use polymer</h2>
+          <ol>
+            <li>Polymer Library</li>
+            <li>Polymer App Toolbox</li>
+          </ol>
+        </section>
+        <section>
+          <section>
+            <h2>Polymer Library</h2>
+            <ol>
+              <li class="fragment">Using the Polymer Catalog</li>
+              <li class="fragment">Creating an element from scratch</li>
+            </ol>
+          </section>
+          <section>
+            <h2>1. Using the Polymer Catalog</h2>
+            <p>The <a href="https://elements.polymer-project.org/" target="_blank">Polymer Element Catalog</a> provide elements that you can use in your web pages and apps. These elements are built with the Polymer library.</p>
+          </section>
+          <section>
+            <ul>
+              <li>App Elements => App elements</li>
+              <li class="fragment">Iron Elements => Polymer core elements</li>
+              <li class="fragment">Paper Elements => Material design elements</li>
+              <li class="fragment">Google Web components => Components for Google´s APIs and services</li>
+              <li class="fragment">Gold Elements => Ecommerce elements</li>
+              <li class="fragment">Neon Elements => Animation and special effects</li>
+              <li class="fragment">Platinum Elements => Offline, push and more</li>
+              <li class="fragment">Molecules => Wrappers for third party libraries</li>
+            </ul>
+          </section>
+          <section>
+            <h2>2. Creating an element from scratch</h2>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Polymer App Toolbox</h2>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Next gen: Polymer 2.0</h2>
+            <ul>
+              <li>Take advantage of v1 of Shadow DOM and Custom elements API</li>
+              <li class="fragment">Use of ES6 classes syntax for creating custom elements</li>
+              <li class="fragment">Polymer will provide a lightweight compatibility layer for migration</li>
+            </ul>
+          </section>
+          <section>
+            <pre><code class="js" style="word-wrap: break-word;">
+              class MyElement extends Polymer.element {
+                static get is() { return 'my-element'; }
+                static get config() {
+                  properties: {
+                    //Custom element properties
+                  }
+                  observers: {
+                    //Custom element observers
+                  }
+                }
+                constructor() {
+                  super();
+                }
+                customElements.define(MyElement.is, MyElement);
+              }
+            </code></pre>
+          </section>
+        </section>
+      </div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>

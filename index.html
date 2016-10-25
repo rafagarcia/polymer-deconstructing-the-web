@@ -174,6 +174,329 @@
           </section>
         </section>
         <section>
+          <section>
+            <h2>Polymer Fundamentals</h2>
+          </section>
+          <section>
+            <p>Registering an element</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    // register an element
+    MyElement = Polymer({
+
+      is: 'my-element',
+
+      // See below for lifecycle callbacks
+      created: function() {
+        this.textContent = 'My element!';
+      }
+
+    });
+
+    // create an instance with createElement:
+    var el1 = document.createElement('my-element');
+
+    // ... or with the constructor:
+    var el2 = new MyElement();
+            </code></pre>
+          </section>
+          <section>
+            <p>Defining a custom constructor</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    MyElement = Polymer({
+
+      is: 'my-element',
+
+      factoryImpl: function(foo, bar) {
+        this.foo = foo;
+        this.configureWithBar(bar);
+      },
+
+      configureWithBar: function(bar) {
+        ...
+      }
+
+    });
+
+    var el = new MyElement(42, 'octopus');
+            </code></pre>
+          </section>
+          <section>
+            <p>Extending a native HTML element</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    MyInput = Polymer({
+
+      is: 'my-input',
+
+      extends: 'input',
+
+      created: function() {
+        this.style.border = '1px solid red';
+      }
+
+    });
+
+    var el1 = new MyInput();
+    console.log(el1 instanceof HTMLInputElement); // true
+
+    var el2 = document.createElement('input', 'my-input');
+    console.log(el2 instanceof HTMLInputElement); // true
+
+    /* To use a type-extension element in markup, use the native tag
+    * and add an is attribute that specifies the extension type name
+    */
+
+    <input is="my-input">
+            </code></pre>
+          </section>
+          <section>
+            <p>Lifecycle</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    MyElement = Polymer({
+
+      is: 'my-element',
+
+      created: function() {
+        console.log(this.localName + '#' + this.id + ' was created');
+      },
+
+      ready: function() {
+        console.log(this.localName + '#' + this.id + ' has local DOM initialized');
+      },
+
+      attached: function() {
+        console.log(this.localName + '#' + this.id + ' was attached');
+      },
+
+      detached: function() {
+        console.log(this.localName + '#' + this.id + ' was detached');
+      },
+
+      attributeChanged: function(name, type) {
+        console.log(this.localName + '#' + this.id + ' attribute ' + name +
+          ' was changed to ' + this.getAttribute(name));
+      }
+
+    });
+            </code></pre>
+          </section>
+          <section>
+            <p>Adding local DOM</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    <link rel="import"  href="https://polygit2.appspot.com/components/polymer/polymer.html">
+    <dom-module id="dom-element">
+      <template>
+        <p>Hello, i am a paragraph</p>
+      </template>
+
+      <script>
+        Polymer({
+          is: "dom-element"
+        });
+      </script>
+
+    </dom-module>
+            </code></pre>
+          </section>
+          <section>
+            <p>Importing element to our html</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+      &lt;head&gt;
+        &lt;script src="https://polygit2.appspot.com/components/webcomponentsjs/webcomponents-lite.js"&gt;&lt;/script&gt;
+        &lt;link rel="import" href="dom-element.html"&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;dom-element&gt;&lt;/dom-element&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+            </code></pre>
+          </section>
+          <section>
+            <p>Composing with local DOM (I) - picture-frame.html</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    <link rel="import"  href="https://polygit2.appspot.com/components/polymer/polymer.html">
+    <dom-module id="picture-frame">
+
+      <template>
+        <!-- scoped CSS for this element -->
+        <style>
+          div {
+            display: inline-block;
+            background-color: #ccc;
+            border-radius: 8px;
+            padding: 4px;
+          }
+        </style>
+        <div>
+          <!-- any children are rendered here -->
+          <content></content>
+        </div>
+      </template>
+
+      <script>
+        Polymer({
+          is: "picture-frame",
+        });
+      </script>
+
+    </dom-module>
+            </code></pre>
+          </section>
+          <section>
+            <p>Composing with local DOM (II) - index.html</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+      &lt;head&gt;
+        &lt;script src="https://polygit2.appspot.com/components/webcomponentsjs/webcomponents-lite.js"&gt;&lt;/script&gt;
+        &lt;link rel="import" href="picture-frame.html"&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;picture-frame&gt;
+          &lt;img src="https://www.polymer-project.org/images/logos/p-logo-32.png"&gt;
+        &lt;/picture-frame&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+            </code></pre>
+          </section>
+          <section>
+              <p>Using data binding I - Declare the binding</p>
+              <pre><code class="js" style="word-wrap: break-word;">
+    <link rel="import"  href="https://polygit2.appspot.com/components/polymer/polymer.html">
+    <!-- import the iron-input custom element -->
+    <link rel="import" href="https://polygit2.appspot.com/components/iron-input/iron-input.html">
+
+    <dom-module id="name-tag">
+
+      <template>
+        <!-- bind to the "owner" property -->
+        This is <b>{{owner}}</b>'s name-tag element.
+      </template>
+
+      <script>
+      Polymer({
+        is: "name-tag",
+        ready: function() {
+          // set this element's owner property
+          this.owner = "Daniel";
+        }
+      });
+      </script>
+
+    </dom-module>
+              </code></pre>
+            </section>
+            <section>
+              <p>Using data binding II - Import the component with the binding</p>
+              <pre><code class="js" style="word-wrap: break-word;">
+    &lt;!DOCTYPE html&gt;
+      &lt;html lang="en"&gt;
+        &lt;head&gt;
+          &lt;script src="https://polygit2.appspot.com/components/webcomponentsjs/webcomponents-lite.js"&gt;&lt;/script&gt;
+          &lt;link rel="import" href="name-tag.html"&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;name-tag&gt;&lt;/name-tag&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+              </code></pre>
+            </section>
+            <section>
+              <p>Declaring properties I</p>
+              <pre><code class="js" style="word-wrap: break-word;">
+  <link rel="import"  href="https://polygit2.appspot.com/components/polymer/polymer.html">
+
+  <dom-module id="configurable-name-tag">
+
+    <template>
+      <!-- bind to the "owner" property -->
+      This is <b>{{owner}}</b>'s configurable-name-tag element.
+    </template>
+
+    <script>
+      Polymer({
+        is: "configurable-name-tag",
+        properties: {
+          // declare the owner property
+          owner: {
+            type: String,
+            value: "Daniel"
+          }
+        }
+      });
+    </script>
+
+  </dom-module>
+            </code></pre>
+            </section>
+            <section>
+              <p>Declaring properties II</p>
+              <pre><code class="js" style="word-wrap: break-word;">
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+      &lt;head&gt;
+        &lt;script src="https://polygit2.appspot.com/components/webcomponentsjs/webcomponents-lite.js"&gt;&lt;/script&gt;
+        &lt;link rel="import" href="configurable-name-tag.html"&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;!-- configure a property from markup by setting
+             the corresponding attribute                 --&gt;
+        &lt;configurable-name-tag owner="Scott"&gt;&lt;/configurable-name-tag&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+              </code></pre>
+            </section>
+          <section>
+            <p>Binding to properties I</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    <link rel="import"  href="https://polygit2.appspot.com/components/polymer/polymer.html">
+    <!-- import the iron-input custom element -->
+    <link rel="import" href="https://polygit2.appspot.com/components/iron-input/iron-input.html">
+
+    <dom-module id="editable-name-tag">
+
+      <template>
+        <p>
+        This is a <strong>{{owner}}</strong>'s editable-name-tag.
+        </p>
+        <!-- iron-input exposes a two-way bindable input value -->
+        <input is="iron-input" bind-value="{{owner}}"
+          placeholder="Your name here...">
+      </template>
+
+      <script>
+        Polymer({
+          is: "editable-name-tag",
+          properties: {
+            owner: {
+              type: String,
+              value: "Daniel"
+            }
+          }
+        });
+      </script>
+
+    </dom-module>
+            </code></pre>
+          </section>
+          <section>
+            <p>Binding to properties II</p>
+            <pre><code class="js" style="word-wrap: break-word;">
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+      &lt;head&gt;
+        &lt;script src="https://polygit2.appspot.com/components/webcomponentsjs/webcomponents-lite.js"&gt;&lt;/script&gt;
+        &lt;link rel="import" href="editable-name-tag.html"&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;editable-name-tag&gt;&lt;/editable-name-tag&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+            </code></pre>
+          </section>
+        </section>
+        <section>
           <h2>Two ways to use polymer</h2>
           <ol>
             <li>Polymer Library</li>
@@ -206,6 +529,9 @@
           </section>
           <section>
             <h2>2. Creating an element from scratch</h2>
+          </section>
+          <section>
+            <p>Steps for creating a component from scratch</p>
           </section>
         </section>
         <section>

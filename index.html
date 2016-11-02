@@ -30,8 +30,9 @@
           <ul>
             <li>My name is Rafael García</li>
             <li>Work as Front-end developer in <a href="http://sngular.team/" target="_blank">S|ngular</a></li>
-            <li>Last 15 months working with Polymer for BBVA</li>
+            <li>Last 18 months working with Polymer for BBVA</li>
             <li>My Twitter account is @rafagarcia</li>
+            <li>Speaker at the Polymer Day</li>
           </ul>
         </section>
         <section>
@@ -371,7 +372,7 @@
 
       <template>
         <!-- bind to the "owner" property -->
-        This is <b>{{owner}}</b>'s name-tag element.
+        This is <b>{ {owner} }</b>'s name-tag element.
       </template>
 
       <script>
@@ -411,7 +412,7 @@
 
     <template>
       <!-- bind to the "owner" property -->
-      This is <b>{{owner}}</b>'s configurable-name-tag element.
+      This is <b>{ {owner} }</b>'s configurable-name-tag element.
     </template>
 
     <script>
@@ -441,7 +442,7 @@
       &lt;/head&gt;
       &lt;body&gt;
         &lt;!-- configure a property from markup by setting
-             the corresponding attribute                 --&gt;
+             the corresponding attribute --&gt;
         &lt;configurable-name-tag owner="Scott"&gt;&lt;/configurable-name-tag&gt;
       &lt;/body&gt;
     &lt;/html&gt;
@@ -458,10 +459,10 @@
 
       <template>
         <p>
-        This is a <strong>{{owner}}</strong>'s editable-name-tag.
+        This is a <strong>{ {owner} }</strong>'s editable-name-tag.
         </p>
         <!-- iron-input exposes a two-way bindable input value -->
-        <input is="iron-input" bind-value="{{owner}}"
+        <input is="iron-input" bind-value="{ {owner} }"
           placeholder="Your name here...">
       </template>
 
